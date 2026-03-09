@@ -1,26 +1,25 @@
-text = "IT Support Lead"
-text = text.lower()
+jobs_before_case_correction = [
+    "Help Desk Technician",
+    "IT Help Desk", 
+    "Desktop Support Technician", 
+    "Senior IT Support Engineer",
+    "IT Support Specialist",
+    "Lead Technical Support Specialist"
+    ]
 
-result = text.split()
-#print(result)
+jobs = [s.lower() for s in jobs_before_case_correction]
 
-status = False
 banned_words = ["senior", "lead", "manager"]
 
-for x in range(0, len(result)):
-    #print(f"Starting outter interval: {x + 1}")
-    #print(result[x])
-    for y in range(0,len(banned_words)):
-        #print(banned_words[y])
-        if (result[x]) == banned_words[y]:
-            print(f"Banned word detected: {banned_words[y]}")
+for x in range(0,len(jobs)): # checking each job listing
+    status = False
+    for y in range(0, len(banned_words)): # seeing if any of the banned words are in the job listing
+        words = jobs[x].split()
+        if banned_words[y] in words:
+            print(f"banned word detected: {banned_words[y]}")
             status = True
             break
-    if (status) == True:
-        print("Keyword found! IGNORE")
-        break
-
-if (status) == False:
-    print("NOTIFY")
-
-
+    if status == False: 
+        print(f"NOTIFY: {jobs_before_case_correction[x]}")
+    else:
+        print(f"IGNORE: {jobs_before_case_correction[x]}")
