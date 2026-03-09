@@ -10,16 +10,31 @@ jobs_before_case_correction = [
 jobs = [s.lower() for s in jobs_before_case_correction]
 
 banned_words = ["senior", "lead", "manager"]
+liked_words = ["entry", "support", "desk"]
 
 for x in range(0,len(jobs)): # checking each job listing
-    status = False
+    banned = False
+    liked = False
+    words = jobs[x].split()
+
     for y in range(0, len(banned_words)): # seeing if any of the banned words are in the job listing
-        words = jobs[x].split()
         if banned_words[y] in words:
             print(f"banned word detected: {banned_words[y]}")
-            status = True
+            banned = True
             break
-    if status == False: 
-        print(f"NOTIFY: {jobs_before_case_correction[x]}")
+    if banned == True: 
+        print(f"IGNORE: {jobs_before_case_correction[x]}\n")
+        continue # if banned word is found, skip this job listing
+    
+    for y in range(0,len(liked_words)): # seeing if any of the liked words are in the job listing
+        if liked_words[y] in words:
+            print(f"liked word detected: {liked_words[y]}")
+            liked = True
+            break
+    if liked == True:
+        print(f"NOTIFY: {jobs_before_case_correction[x]}\n")
     else:
-        print(f"IGNORE: {jobs_before_case_correction[x]}")
+        print(f"IGNORE: {jobs_before_case_correction[x]}\n")
+
+
+        
