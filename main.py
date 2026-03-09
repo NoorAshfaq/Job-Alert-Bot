@@ -12,14 +12,14 @@ jobs = [s.lower() for s in jobs_before_case_correction]
 banned_words = ["senior", "lead", "manager"]
 liked_words = ["entry", "support", "desk"]
 
-for x in range(0,len(jobs)): # checking each job listing
+for x in range(0, len(jobs)): # checking each job listing
     banned = False
     liked = False
     words = jobs[x].split()
 
-    for y in range(0, len(banned_words)): # seeing if any of the banned words are in the job listing
-        if banned_words[y] in words:
-            print(f"banned word detected: {banned_words[y]}")
+    for word in banned_words: # seeing if any of the banned words are in the job listing | implemented simplified logic
+        if word in words:
+            print(f"banned word detected: {word}")
             banned = True
             break
     if banned == True: 
